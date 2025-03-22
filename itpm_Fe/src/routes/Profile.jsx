@@ -155,7 +155,21 @@ const Profile = () => {
 
   const handleSaveEdit = () => {
     if (selectedOrder) {
-      // Here you would typically update the order in your backend
+      // Get existing orders from localStorage
+      const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      
+      // Update the order in the array
+      const updatedOrders = existingOrders.map(order => 
+        order.id === selectedOrder.id ? selectedOrder : order
+      );
+      
+      // Save updated orders back to localStorage
+      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+      
+      // Update the orders state
+      setOrders(updatedOrders);
+      
+      // Close the edit modal
       setShowEditModal(false);
       setSelectedOrder(null);
     }
@@ -961,29 +975,62 @@ const Profile = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Date</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Product Name</label>
                   <input
-                    type="date"
-                    value={selectedOrder.date}
-                    onChange={(e) => setSelectedOrder({ ...selectedOrder, date: e.target.value })}
+                    type="text"
+                    value={selectedOrder.product?.name || ''}
+                    onChange={(e) => setSelectedOrder({
+                      ...selectedOrder,
+                      product: { ...selectedOrder.product, name: e.target.value }
+                    })}
                     className="w-full bg-gray-800 border border-indigo-900/50 rounded-lg px-4 py-2 text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Items</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Color</label>
                   <input
                     type="text"
-                    value={selectedOrder.items}
-                    onChange={(e) => setSelectedOrder({ ...selectedOrder, items: e.target.value })}
+                    value={selectedOrder.product?.selectedColor || ''}
+                    onChange={(e) => setSelectedOrder({
+                      ...selectedOrder,
+                      product: { ...selectedOrder.product, selectedColor: e.target.value }
+                    })}
                     className="w-full bg-gray-800 border border-indigo-900/50 rounded-lg px-4 py-2 text-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Total</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">RAM</label>
                   <input
                     type="text"
-                    value={selectedOrder.total}
-                    onChange={(e) => setSelectedOrder({ ...selectedOrder, total: e.target.value })}
+                    value={selectedOrder.product?.selectedRAM || ''}
+                    onChange={(e) => setSelectedOrder({
+                      ...selectedOrder,
+                      product: { ...selectedOrder.product, selectedRAM: e.target.value }
+                    })}
+                    className="w-full bg-gray-800 border border-indigo-900/50 rounded-lg px-4 py-2 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Quantity</label>
+                  <input
+                    type="number"
+                    value={selectedOrder.product?.quantity || 1}
+                    onChange={(e) => setSelectedOrder({
+                      ...selectedOrder,
+                      product: { ...selectedOrder.product, quantity: parseInt(e.target.value) }
+                    })}
+                    className="w-full bg-gray-800 border border-indigo-900/50 rounded-lg px-4 py-2 text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Price</label>
+                  <input
+                    type="number"
+                    value={selectedOrder.product?.price || 0}
+                    onChange={(e) => setSelectedOrder({
+                      ...selectedOrder,
+                      product: { ...selectedOrder.product, price: parseFloat(e.target.value) }
+                    })}
                     className="w-full bg-gray-800 border border-indigo-900/50 rounded-lg px-4 py-2 text-white"
                   />
                 </div>

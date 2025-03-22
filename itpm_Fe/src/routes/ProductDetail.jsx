@@ -26,7 +26,7 @@ const ProductDetail = () => {
   const product = {
     id: 1,
     name: "MacBook Pro M3",
-    price: 2000.99,
+    price: 4000.99,
     image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&h=300&fit=crop",
     rating: 4.8,
     specs: "M3 Chip, 16GB RAM, 512GB SSD",

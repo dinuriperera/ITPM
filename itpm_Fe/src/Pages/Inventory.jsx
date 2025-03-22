@@ -399,7 +399,7 @@ const Inventory = () => {
         stock: 13,
         cost: 1500,
         details: {
-          price: 1800,
+          price: 1900,
           ram: '16GB',
           vga: 'Intel Iris Xe',
           processor: 'Intel i7-1360P',

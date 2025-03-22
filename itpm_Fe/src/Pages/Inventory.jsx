@@ -447,7 +447,7 @@ const Inventory = () => {
         stock: 14,
         cost: 1300,
         details: {
-          price: 1600,
+          price: 1000,
           ram: '8GB',
           vga: 'M2 Integrated',
           processor: 'Apple M2',
